@@ -55,7 +55,7 @@ Die dargestellten Kunstwerke dienen ausschließlich zur Inspiration und stehen n
 | `data/settings.json` | Website-Texte, Farben, Links | Öffentlich auf der Website sichtbar |
 | `data/categories.json` | Galerie-Kategorien | Öffentlich |
 | `data/gallery.json` | Bild-Metadaten (Titel, Dateinamen) | Öffentlich |
-| `uploads/` | Hochgeladene Bilder | Öffentlich auf der Website |
+| `uploads/` | Hochgeladene Bilder (Kunstwerke) | Öffentlich auf der Website, dienen als Backup in GitHub |
 | Code-Dateien (`src/`, `public/`) | Quellcode | Kein sensibles Material |
 
 ---
