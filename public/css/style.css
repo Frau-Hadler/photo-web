@@ -67,7 +67,7 @@ img { max-width: 100%; height: auto; display: block; }
   height: 72px;
 }
 .nav-logo { display: flex; align-items: center; gap: .75rem; }
-.logo-img { height: 40px; width: auto; filter: drop-shadow(0 0 8px rgba(200,169,126,.3)); transition: filter var(--transition); }
+.logo-img { height: 40px; width: 40px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(200,169,126,.3)); transition: filter var(--transition); }
 .logo-img:hover { filter: drop-shadow(0 0 16px rgba(200,169,126,.6)); }
 .logo-text {
   font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600;
@@ -164,8 +164,9 @@ img { max-width: 100%; height: auto; display: block; }
   max-width: 800px; padding: 2rem;
 }
 .hero-logo {
-  width: 120px; height: 120px; object-fit: contain;
+  width: 120px; height: 120px; object-fit: cover;
   margin: 0 auto 2rem; border-radius: 50%;
+  background: var(--bg-card);
   filter: drop-shadow(0 0 20px rgba(200,169,126,.4));
 }
 .floating {
@@ -239,6 +240,7 @@ img { max-width: 100%; height: auto; display: block; }
 .about-image {
   border-radius: var(--radius); width: 100%;
   aspect-ratio: 3/4; object-fit: cover;
+  background: var(--bg-card);
   box-shadow: var(--shadow-lg);
   transition: transform var(--transition);
 }
@@ -464,7 +466,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex; align-items: center; gap: .75rem;
   font-family: var(--font-heading); font-size: 1.2rem;
 }
-.footer-logo { height: 32px; width: auto; }
+.footer-logo { height: 32px; width: 32px; object-fit: contain; }
 .footer-links { display: flex; gap: 2rem; }
 .footer-links a {
   color: var(--text-muted); font-size: .85rem;

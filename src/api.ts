@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { join } from "path";
 import { unlinkSync, existsSync, mkdirSync } from "fs";
-import { login, setAuthCookie, clearAuthCookie, authMiddleware, createToken } from "./auth";
+import { login, setAuthCookie, clearAuthCookie, apiAuthMiddleware, createToken } from "./auth";
 import {
   getSettings, saveSettings, getCategories, saveCategories,
   getImages, saveImages, getMessages, saveMessages,
@@ -159,7 +159,7 @@ api.get("/public/impressum", (c) => {
 // ============ ADMIN ROUTES (protected) ============
 
 const admin = new Hono();
-admin.use("*", authMiddleware);
+admin.use("*", apiAuthMiddleware);
 
 // --- Settings ---
 admin.get("/settings", (c) => {

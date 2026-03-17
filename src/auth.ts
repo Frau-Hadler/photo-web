@@ -5,6 +5,7 @@ import { getCredentials } from "./storage";
 const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret-change-me";
 const TOKEN_COOKIE = "nfc_session";
 const TOKEN_EXPIRY = 24 * 60 * 60;
+const IS_PRODUCTION = process.env.NODE_ENV === "production" || !!process.env.NETLIFY;
 
 interface JwtPayload {
   email: string;
@@ -66,7 +67,7 @@ export async function login(email: string, password: string): Promise<string | n
 export function setAuthCookie(c: Context, token: string): void {
   setCookie(c, TOKEN_COOKIE, token, {
     httpOnly: true,
-    secure: false,
+    secure: IS_PRODUCTION,
     sameSite: "Lax",
     maxAge: TOKEN_EXPIRY,
     path: "/"
@@ -86,6 +87,20 @@ export async function authMiddleware(c: Context, next: Next): Promise<Response |
   if (!payload) {
     clearAuthCookie(c);
     return c.redirect("/login");
+  }
+  c.set("user", payload);
+  await next();
+}
+
+export async function apiAuthMiddleware(c: Context, next: Next): Promise<Response | void> {
+  const token = getCookie(c, TOKEN_COOKIE);
+  if (!token) {
+    return c.json({ error: "Nicht autorisiert. Bitte erneut anmelden." }, 401);
+  }
+  const payload = await verifyToken(token);
+  if (!payload) {
+    clearAuthCookie(c);
+    return c.json({ error: "Sitzung abgelaufen. Bitte erneut anmelden." }, 401);
   }
   c.set("user", payload);
   await next();

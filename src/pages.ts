@@ -349,8 +349,13 @@ ${nav(s, "")}
     <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
 
     <h2>2. Hosting</h2>
-    <p>Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.</p>
-    <p>Das externe Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).</p>
+    <p>Diese Website wird über <strong>Netlify, Inc.</strong> (44 Montgomery Street, Suite 300, San Francisco, California 94104, USA) gehostet. Netlify ist ein Cloud-Hosting-Dienst, der Webseiten über ein weltweites Content Delivery Network (CDN) bereitstellt.</p>
+    <p>Wenn Sie unsere Website besuchen, werden automatisch durch Netlify Informationen erfasst und in sogenannten Server-Log-Dateien gespeichert. Dies umfasst: IP-Adresse, Datum und Uhrzeit des Zugriffs, übertragene Datenmenge, Referrer-URL, verwendeter Browser und Betriebssystem. Diese Daten werden auf Servern in den USA und/oder Europa verarbeitet.</p>
+    <p>Die Nutzung von Netlify erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer zuverlässigen, schnellen und sicheren Bereitstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO.</p>
+    <p>Netlify verfügt über Zertifizierungen nach dem EU-US Data Privacy Framework. Weitere Informationen finden Sie in der <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerklärung von Netlify</a>.</p>
+
+    <h3>SSL- bzw. TLS-Verschlüsselung</h3>
+    <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Kontaktanfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile. Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
 
     <h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
     <h3>Datenschutz</h3>

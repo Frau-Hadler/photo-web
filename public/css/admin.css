@@ -176,9 +176,11 @@
 .upload-area:hover { border-color: var(--primary); color: var(--primary); }
 .upload-area.dragover { border-color: var(--primary); background: rgba(200,169,126,.05); }
 .upload-preview {
-  max-width: 200px; max-height: 200px; object-fit: contain;
+  max-width: 200px; max-height: 200px; object-fit: cover;
   margin: 0 auto; border-radius: var(--radius-sm);
+  background: var(--bg-surface);
 }
+.upload-area span { pointer-events: none; }
 
 .upload-drop-zone {
   border: 2px dashed var(--border); border-radius: var(--radius);
