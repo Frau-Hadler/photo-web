@@ -258,8 +258,9 @@ admin.post("/images", async (c) => {
     return c.json({ error: "Nur JPEG, PNG, WebP, GIF und AVIF sind erlaubt." }, 400);
   }
 
-  if (file.size > 20 * 1024 * 1024) {
-    return c.json({ error: "Maximale Dateigröße: 20 MB." }, 400);
+  // Größeres Limit für Galerie-Bilder, Qualität bleibt unverändert
+  if (file.size > 50 * 1024 * 1024) {
+    return c.json({ error: "Maximale Dateigröße: 50 MB." }, 400);
   }
 
   const ext = file.name.split(".").pop() || "jpg";
@@ -329,8 +330,9 @@ admin.post("/upload/:type", async (c) => {
     return c.json({ error: "Datei ist erforderlich." }, 400);
   }
 
-  if (file.size > 10 * 1024 * 1024) {
-    return c.json({ error: "Maximale Dateigröße: 10 MB." }, 400);
+  // Größeres Limit für Logo/Profilbild
+  if (file.size > 25 * 1024 * 1024) {
+    return c.json({ error: "Maximale Dateigröße: 25 MB." }, 400);
   }
 
   const ext = file.name.split(".").pop() || "png";
