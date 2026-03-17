@@ -349,6 +349,70 @@ Wichtig:
 
 ---
 
+## Spätere Migration auf Raspberry Pi
+
+Ziel: Die komplette App später von Railway auf einen Raspberry Pi umziehen, ohne Datenverlust und ohne dass sich die Website-Funktionen ändern.
+
+### Was beim Umzug mitgenommen werden muss
+
+- Code aus dem GitHub-Repo `Frau-Hadler/photo-web`
+- Alle öffentlichen Inhalte:
+  - `data/settings.json`
+  - `data/categories.json`
+  - `data/gallery.json`
+  - `uploads/`
+- Alle sensiblen lokalen Dateien:
+  - `.env`
+  - `data/credentials.json`
+  - `data/messages.json`
+
+### Wichtige Punkte für den Pi
+
+- Der Raspberry Pi soll später den **gleichen Bun-Server** starten wie Railway:
+  - Produktion: `bun run src/index.ts`
+  - Entwicklung: `bun --watch run src/index.ts`
+- Der Pi braucht eine feste Umgebung für:
+  - `PORT`
+  - `JWT-Secret`
+  - GitHub-Token für `syncToGitHub()`
+  - ggf. weitere Produktions-Variablen aus `.env`
+- Falls der Pi hinter einem Router läuft:
+  - Portweiterleitung oder Reverse Proxy einrichten
+  - später HTTPS über z.B. Nginx/Caddy/Traefik aktivieren
+
+### Vorgehen beim späteren Umzug
+
+1. **Backup machen**
+   - komplettes Projektverzeichnis sichern
+   - besonders `data/`, `uploads/` und `.env`
+2. **GitHub-Stand übernehmen**
+   - aktuelles `main` aus `photo-web` auf dem Pi klonen oder pullen
+3. **Umgebungsdatei anlegen**
+   - `.env` auf dem Pi mit denselben/separaten Werten anlegen
+4. **Abhängigkeiten installieren**
+   - `bun install`
+5. **App starten**
+   - `bun run src/index.ts`
+6. **Datenpfade prüfen**
+   - sicherstellen, dass `data/` und `uploads/` auf dem Pi existieren und beschreibbar sind
+
+### Was sich beim Umzug nicht ändern darf
+
+- Admin-Login-Funktion
+- Nachrichten-Speicherung
+- öffentliche Galerie-Daten
+- Upload-Verhalten
+- GitHub-Sync für öffentliche Daten
+- Sicherheitsregeln für sensible Dateien
+
+### Merksatz für den Pi-Umzug
+
+- **Code kommt aus GitHub**
+- **öffentliche Inhalte kommen aus `data/` und `uploads/`**
+- **sensible Daten bleiben lokal in `.env`, `credentials.json`, `messages.json`**
+
+---
+
 ## Hinweis: Fehleranalyse mobil (Header / Deploy)
 
 - Wenn auf dem Handy scheinbar alte Stände (z.B. Navigations-Layout) angezeigt werden:
