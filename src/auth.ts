@@ -5,7 +5,7 @@ import { getCredentials } from "./storage";
 const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret-change-me";
 const TOKEN_COOKIE = "nfc_session";
 const TOKEN_EXPIRY = 24 * 60 * 60;
-const IS_PRODUCTION = process.env.NODE_ENV === "production" || !!process.env.NETLIFY;
+const IS_PRODUCTION = process.env.NODE_ENV === "production" || !!process.env.NETLIFY || !!process.env.RAILWAY_ENVIRONMENT || !!process.env.RENDER;
 
 interface JwtPayload {
   email: string;

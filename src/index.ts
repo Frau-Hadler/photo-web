@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { api } from "./api";
 import { authMiddleware, isAuthenticated } from "./auth";
-import { initCredentials } from "./storage";
+import { initCredentials, getSettings, getImages } from "./storage";
 import { initGitRepo } from "./github-sync";
 import { homePage, galleryPage, contactPage, impressumPage, datenschutzPage, loginPage } from "./pages";
 import { dashboardPage, inhaltePage, galeriePage, nachrichtenPage, einstellungenPage } from "./admin-pages";
@@ -19,7 +19,9 @@ app.use("*", async (c, next) => {
     "/.git", "/.env", "/data/", "/.gitignore",
     "/tsconfig", "/src/", "/node_modules/",
     "/package.json", "/bun.lock", "/.git/",
-    "/credentials", "/askpass"
+    "/credentials", "/askpass",
+    "/dockerfile", "/docker", "/railway.json",
+    "/.dockerignore", "/claude.md"
   ];
 
   for (const b of blocked) {
@@ -50,9 +52,61 @@ app.use("/uploads/*", serveStatic({ root: "./" }));
 app.use("/css/*", serveStatic({ root: "./public" }));
 app.use("/js/*", serveStatic({ root: "./public" }));
 app.use("/img/*", serveStatic({ root: "./public" }));
-app.use("/favicon.ico", serveStatic({ root: "./public" }));
+app.get("/favicon.ico", (c) => {
+  const s = getSettings();
+  if (s.logo) return c.redirect(s.logo, 302);
+  return c.notFound();
+});
 
 app.route("/api", api);
+
+function escXml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+}
+
+app.get("/sitemap.xml", (c) => {
+  const s = getSettings();
+  const images = getImages();
+  const proto = c.req.header("x-forwarded-proto") || "http";
+  const host = c.req.header("host") || "localhost:3000";
+  const base = `${proto}://${host}`;
+  const today = new Date().toISOString().split("T")[0];
+
+  const pages = [
+    { loc: "/", prio: "1.0", freq: "weekly" },
+    { loc: "/galerie", prio: "0.9", freq: "weekly" },
+    { loc: "/kontakt", prio: "0.7", freq: "monthly" },
+    { loc: "/impressum", prio: "0.3", freq: "yearly" },
+    { loc: "/datenschutz", prio: "0.3", freq: "yearly" },
+  ];
+
+  const imageEntries = images.slice(0, 100).map(img =>
+    `  <url>\n    <loc>${base}/galerie</loc>\n    <image:image>\n      <image:loc>${base}/uploads/${escXml(img.filename)}</image:loc>\n      <image:title>${escXml(img.title || img.originalName)}</image:title>\n    </image:image>\n  </url>`
+  ).join("\n");
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${pages.map(p => `  <url>\n    <loc>${base}${p.loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${p.freq}</changefreq>\n    <priority>${p.prio}</priority>\n  </url>`).join("\n")}
+${imageEntries}
+</urlset>`;
+
+  c.header("Content-Type", "application/xml; charset=utf-8");
+  return c.body(xml);
+});
+
+app.get("/robots.txt", (c) => {
+  const proto = c.req.header("x-forwarded-proto") || "http";
+  const host = c.req.header("host") || "localhost:3000";
+  return c.text(`User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /api/
+
+Sitemap: ${proto}://${host}/sitemap.xml
+`);
+});
 
 app.get("/", (c) => c.html(homePage()));
 app.get("/galerie", (c) => c.html(galleryPage()));

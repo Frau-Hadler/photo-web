@@ -1,0 +1,10 @@
+node_modules
+.env
+.git
+.gitignore
+.dockerignore
+Dockerfile
+*.md
+*.log
+.DS_Store
+Thumbs.db

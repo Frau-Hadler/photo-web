@@ -98,16 +98,18 @@ export function inhaltePage(): string {
   <div class="tab-content active" id="tab-hero">
     <div class="form-card">
       <h3>Hero-Bereich</h3>
+      <p class="form-help">Das Erste, was Besucher auf der Startseite sehen. Wähle einen aussagekräftigen Titel.</p>
       <div class="form-group"><label>Titel</label><input type="text" name="heroTitle" value="${escHtml(s.heroTitle)}"></div>
       <div class="form-group"><label>Untertitel</label><textarea name="heroSubtitle" rows="3">${escHtml(s.heroSubtitle)}</textarea></div>
-      <div class="form-group"><label>Button-Text</label><input type="text" name="heroButtonText" value="${escHtml(s.heroButtonText)}"></div>
-      <div class="form-group"><label>Button-Link</label><input type="text" name="heroButtonLink" value="${escHtml(s.heroButtonLink)}"></div>
+      <div class="form-group"><label>Button-Text</label><input type="text" name="heroButtonText" value="${escHtml(s.heroButtonText)}"><small>Text des Hauptbuttons, z.B. „Galerie entdecken"</small></div>
+      <div class="form-group"><label>Button-Link</label><input type="text" name="heroButtonLink" value="${escHtml(s.heroButtonLink)}"><small>Wohin der Button führt, z.B. /galerie oder /kontakt</small></div>
     </div>
   </div>
 
   <div class="tab-content" id="tab-about">
     <div class="form-card">
       <h3>Über mich</h3>
+      <p class="form-help">Erzähle Besuchern etwas über dich und deine Kunst. Das Profilbild wird automatisch auf die optimale Größe angepasst.</p>
       <div class="form-group"><label>Titel</label><input type="text" name="aboutTitle" value="${escHtml(s.aboutTitle)}"></div>
       <div class="form-group"><label>Text</label><textarea name="aboutText" rows="6">${escHtml(s.aboutText)}</textarea></div>
       <div class="form-group">
@@ -139,6 +141,7 @@ export function inhaltePage(): string {
   <div class="tab-content" id="tab-commission">
     <div class="form-card">
       <h3>Auftragsarbeiten</h3>
+      <p class="form-help">Dieser Text erscheint sowohl auf der Startseite als auch auf der Kontaktseite.</p>
       <div class="form-group"><label>Titel</label><input type="text" name="commissionTitle" value="${escHtml(s.commissionTitle)}"></div>
       <div class="form-group"><label>Text</label><textarea name="commissionText" rows="4">${escHtml(s.commissionText)}</textarea></div>
     </div>
@@ -147,6 +150,7 @@ export function inhaltePage(): string {
   <div class="tab-content" id="tab-links">
     <div class="form-card">
       <h3>Social Media Links</h3>
+      <p class="form-help">Verlinke deine Social-Media-Profile. Diese erscheinen im Footer, auf der Kontaktseite und im Über-mich-Bereich.</p>
       <div id="socialLinksEditor">
         ${s.socialLinks.map((l, i) => `
         <div class="link-row" data-index="${i}">
@@ -180,8 +184,9 @@ export function inhaltePage(): string {
   <div class="tab-content" id="tab-branding">
     <div class="form-card">
       <h3>Branding</h3>
-      <div class="form-group"><label>Website-Name</label><input type="text" name="siteName" value="${escHtml(s.siteName)}"></div>
-      <div class="form-group"><label>Tagline</label><input type="text" name="siteTagline" value="${escHtml(s.siteTagline)}"></div>
+      <p class="form-help">Name, Logo und Farben deiner Website. Das Logo wird automatisch auch als Favicon (Symbol im Browser-Tab) verwendet.</p>
+      <div class="form-group"><label>Website-Name</label><input type="text" name="siteName" value="${escHtml(s.siteName)}"><small>Wird im Header, Footer und Browser-Tab angezeigt.</small></div>
+      <div class="form-group"><label>Tagline</label><input type="text" name="siteTagline" value="${escHtml(s.siteTagline)}"><small>Kurzbeschreibung deiner Website.</small></div>
       <div class="form-group">
         <label>Logo</label>
         <div class="upload-area" id="logoUpload" data-type="logo">
@@ -189,10 +194,10 @@ export function inhaltePage(): string {
           <input type="file" accept="image/*" class="upload-input" style="display:none">
         </div>
       </div>
-      <div class="form-group"><label>Primärfarbe</label><div class="color-input"><input type="color" name="primaryColor" value="${s.primaryColor}"><span>${s.primaryColor}</span></div></div>
-      <div class="form-group"><label>Akzentfarbe</label><div class="color-input"><input type="color" name="accentColor" value="${s.accentColor}"><span>${s.accentColor}</span></div></div>
-      <div class="form-group"><label>Footer-Text</label><input type="text" name="footerText" value="${escHtml(s.footerText)}"></div>
-      <div class="form-group"><label>Meta-Beschreibung (SEO)</label><textarea name="metaDescription" rows="2">${escHtml(s.metaDescription)}</textarea></div>
+      <div class="form-group"><label>Primärfarbe</label><div class="color-input"><input type="color" name="primaryColor" value="${s.primaryColor}"><span>${s.primaryColor}</span></div><small>Hauptfarbe der Website (z.B. Gold, Blau).</small></div>
+      <div class="form-group"><label>Akzentfarbe</label><div class="color-input"><input type="color" name="accentColor" value="${s.accentColor}"><span>${s.accentColor}</span></div><small>Wird für Hover-Effekte und Highlights verwendet.</small></div>
+      <div class="form-group"><label>Footer-Text</label><input type="text" name="footerText" value="${escHtml(s.footerText)}"><small>Copyright-Zeile am Ende jeder Seite.</small></div>
+      <div class="form-group"><label>Meta-Beschreibung (SEO)</label><textarea name="metaDescription" rows="2">${escHtml(s.metaDescription)}</textarea><small>Wird in Google-Suchergebnissen als Beschreibung angezeigt. Ideal: 120–160 Zeichen.</small></div>
     </div>
   </div>
 
@@ -214,6 +219,7 @@ export function galeriePage(): string {
 <div class="tab-content active" id="tab-upload">
   <div class="form-card">
     <h3>Neues Bild hochladen</h3>
+    <p class="form-help">Bilder werden automatisch auf die optimale Größe angepasst (max. 1920px). Unterstützt: JPEG, PNG, WebP, GIF.</p>
     <form id="imageUploadForm" enctype="multipart/form-data">
       <div class="upload-drop-zone" id="imageDropZone">
         <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -246,6 +252,7 @@ export function galeriePage(): string {
 <div class="tab-content" id="tab-categories">
   <div class="form-card">
     <h3>Kategorien verwalten</h3>
+    <p class="form-help">Kategorien helfen Besuchern, deine Werke nach Themen zu filtern. Beim Löschen einer Kategorie werden alle zugehörigen Bilder ebenfalls entfernt.</p>
     <form id="addCategoryForm" class="inline-form">
       <input type="text" name="name" placeholder="Kategorie-Name" required>
       <input type="text" name="description" placeholder="Beschreibung (optional)">
@@ -281,11 +288,12 @@ export function einstellungenPage(): string {
 <div class="tab-content active" id="tab-account">
   <div class="form-card">
     <h3>Konto-Einstellungen</h3>
+    <p class="form-help">Hier kannst du deine Login-Daten ändern. Dein aktuelles Passwort wird zur Sicherheit immer benötigt.</p>
     <form id="accountForm" class="admin-form">
       <div class="form-group"><label>Aktuelle E-Mail</label><input type="email" id="currentEmail" value="${escHtml(getCredentials().email)}" disabled></div>
-      <div class="form-group"><label>Neue E-Mail</label><input type="email" name="newEmail" placeholder="Neue E-Mail (leer lassen wenn nicht ändern)"></div>
-      <div class="form-group"><label>Neues Passwort</label><input type="password" name="newPassword" placeholder="Neues Passwort (min. 8 Zeichen, leer lassen wenn nicht ändern)"></div>
-      <div class="form-group"><label>Aktuelles Passwort *</label><input type="password" name="currentPassword" required placeholder="Zur Bestätigung erforderlich"></div>
+      <div class="form-group"><label>Neue E-Mail</label><input type="email" name="newEmail" placeholder="Leer lassen, wenn nicht ändern"><small>Nur ausfüllen, wenn du die Login-E-Mail ändern möchtest.</small></div>
+      <div class="form-group"><label>Neues Passwort</label><input type="password" name="newPassword" placeholder="Min. 8 Zeichen, leer lassen wenn nicht ändern"><small>Nur ausfüllen, wenn du das Passwort ändern möchtest.</small></div>
+      <div class="form-group"><label>Aktuelles Passwort *</label><input type="password" name="currentPassword" required placeholder="Zur Bestätigung erforderlich"><small>Pflichtfeld — zur Sicherheit bei jeder Änderung nötig.</small></div>
       <button type="submit" class="btn btn-primary">Speichern</button>
       <div id="accountStatus" class="form-status"></div>
     </form>

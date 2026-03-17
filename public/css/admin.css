@@ -291,6 +291,12 @@
 }
 .inline-form input:focus { outline: none; border-color: var(--primary); }
 
+.form-help {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
 /* === Messages === */
 .messages-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
 .badge {

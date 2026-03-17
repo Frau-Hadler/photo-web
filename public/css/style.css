@@ -531,6 +531,16 @@ img { max-width: 100%; height: auto; display: block; }
   .gallery-masonry { columns: 2; }
 }
 @media (max-width: 768px) {
+  .main-nav {
+    /* Auf dem Handy weniger „schwarzer Balken“ im Header */
+    background: transparent;
+    border-bottom: none;
+  }
+  .main-nav.scrolled {
+    /* Beim Scrollen weiterhin gut lesbare Navigation */
+    background: rgba(10,10,10,.95);
+    border-bottom: 1px solid rgba(200,169,126,.1);
+  }
   .nav-toggle { display: block; }
   .nav-links {
     position: fixed; top: 72px; left: 0; right: 0;

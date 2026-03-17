@@ -5,13 +5,30 @@ function escHtml(s: string): string {
 }
 
 function head(s: SiteSettings, title: string, extra = ""): string {
+  const imp = s.impressum;
+  const authorName = imp?.name && imp.name !== "Vorname Nachname" ? imp.name : s.siteName;
   return `<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="${escHtml(s.metaDescription)}">
+<meta name="author" content="${escHtml(authorName)}">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="${s.primaryColor}">
+<meta name="generator" content="Natis Fine Creation CMS">
 <title>${escHtml(title)} — ${escHtml(s.siteName)}</title>
+${s.logo ? `<link rel="icon" href="${escHtml(s.logo)}">\n<link rel="apple-touch-icon" href="${escHtml(s.logo)}">` : ""}
+<meta property="og:title" content="${escHtml(title)} — ${escHtml(s.siteName)}">
+<meta property="og:description" content="${escHtml(s.metaDescription)}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="${escHtml(s.siteName)}">
+${s.aboutImage ? `<meta property="og:image" content="${escHtml(s.aboutImage)}">` : s.logo ? `<meta property="og:image" content="${escHtml(s.logo)}">` : ""}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escHtml(title)} — ${escHtml(s.siteName)}">
+<meta name="twitter:description" content="${escHtml(s.metaDescription)}">
+${s.aboutImage ? `<meta name="twitter:image" content="${escHtml(s.aboutImage)}">` : s.logo ? `<meta name="twitter:image" content="${escHtml(s.logo)}">` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
@@ -81,7 +98,26 @@ export function homePage(): string {
   const images = getImages().slice(0, 6);
   const cats = getCategories();
 
-  return `${head(s, "Home")}
+  const imp = s.impressum;
+  const authorName = imp?.name && imp.name !== "Vorname Nachname" ? imp.name : s.siteName;
+  const jsonLdWebsite = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": s.siteName,
+    "description": s.metaDescription,
+    "author": { "@type": "Person", "name": authorName },
+    "inLanguage": "de"
+  });
+  const jsonLdPerson = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": authorName,
+    "description": s.aboutText,
+    ...(s.aboutImage ? { "image": s.aboutImage } : {}),
+    "sameAs": s.socialLinks.map(l => l.url)
+  });
+
+  return `${head(s, "Home", `<script type="application/ld+json">${jsonLdWebsite}</script>\n<script type="application/ld+json">${jsonLdPerson}</script>`)}
 <body class="page-home">
 ${nav(s, "home")}
 
@@ -161,7 +197,28 @@ export function galleryPage(): string {
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  return `${head(s, "Galerie")}
+  const jsonLdGallery = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": s.galleryTitle,
+    "description": s.gallerySubtitle,
+    "numberOfItems": images.length,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": images.slice(0, 20).map((img, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "VisualArtwork",
+          "name": img.title,
+          "image": `/uploads/${img.filename}`,
+          ...(img.description ? { "description": img.description } : {})
+        }
+      }))
+    }
+  });
+
+  return `${head(s, "Galerie", `<script type="application/ld+json">${jsonLdGallery}</script>`)}
 <body class="page-gallery">
 ${nav(s, "galerie")}
 
@@ -357,10 +414,10 @@ ${nav(s, "")}
     <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
 
     <h2>2. Hosting</h2>
-    <p>Diese Website wird über <strong>Netlify, Inc.</strong> (44 Montgomery Street, Suite 300, San Francisco, California 94104, USA) gehostet. Netlify ist ein Cloud-Hosting-Dienst, der Webseiten über ein weltweites Content Delivery Network (CDN) bereitstellt.</p>
-    <p>Wenn Sie unsere Website besuchen, werden automatisch durch Netlify Informationen erfasst und in sogenannten Server-Log-Dateien gespeichert. Dies umfasst: IP-Adresse, Datum und Uhrzeit des Zugriffs, übertragene Datenmenge, Referrer-URL, verwendeter Browser und Betriebssystem. Diese Daten werden auf Servern in den USA und/oder Europa verarbeitet.</p>
-    <p>Die Nutzung von Netlify erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer zuverlässigen, schnellen und sicheren Bereitstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO.</p>
-    <p>Netlify verfügt über Zertifizierungen nach dem EU-US Data Privacy Framework. Weitere Informationen finden Sie in der <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerklärung von Netlify</a>.</p>
+    <p>Diese Website wird über <strong>Railway Corp.</strong> (USA) gehostet. Railway ist ein Cloud-Hosting-Dienst für Webanwendungen.</p>
+    <p>Wenn Sie unsere Website besuchen, werden automatisch durch den Hosting-Anbieter Informationen erfasst und in sogenannten Server-Log-Dateien gespeichert. Dies umfasst: IP-Adresse, Datum und Uhrzeit des Zugriffs, übertragene Datenmenge, Referrer-URL, verwendeter Browser und Betriebssystem. Diese Daten werden auf Servern in den USA und/oder Europa verarbeitet.</p>
+    <p>Die Nutzung von Railway erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer zuverlässigen, schnellen und sicheren Bereitstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO.</p>
+    <p>Weitere Informationen finden Sie in der <a href="https://railway.app/legal/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Railway</a>.</p>
 
     <h3>SSL- bzw. TLS-Verschlüsselung</h3>
     <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Kontaktanfragen, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile. Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
@@ -401,7 +458,7 @@ ${nav(s, "")}
     <p>Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt.</p>
 
     <h3>Server-Log-Dateien</h3>
-    <p>Der Hosting-Provider (Netlify) erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Dies sind: Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer-URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage, IP-Adresse.</p>
+    <p>Der Hosting-Provider (Railway) erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Dies sind: Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer-URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage, IP-Adresse.</p>
     <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
 
     <h3>Cookies</h3>
