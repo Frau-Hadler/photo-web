@@ -159,7 +159,7 @@ export function inhaltePage(): string {
           </select>
           <input type="text" placeholder="Plattform" value="${escHtml(l.platform)}" name="socialPlatform_${i}">
           <input type="url" placeholder="URL" value="${escHtml(l.url)}" name="socialUrl_${i}">
-          <button type="button" class="btn btn-sm btn-danger remove-social" data-index="${i}">✕</button>
+          <button type="button" class="btn btn-sm btn-danger remove-link" data-index="${i}">✕</button>
         </div>`).join("")}
       </div>
       <button type="button" class="btn btn-sm btn-outline" id="addSocialLink">+ Social Link hinzufügen</button>
@@ -170,7 +170,7 @@ export function inhaltePage(): string {
         <div class="link-row" data-index="${i}">
           <input type="text" placeholder="Titel" value="${escHtml(l.title)}" name="customTitle_${i}">
           <input type="url" placeholder="URL" value="${escHtml(l.url)}" name="customUrl_${i}">
-          <button type="button" class="btn btn-sm btn-danger remove-custom" data-index="${i}">✕</button>
+          <button type="button" class="btn btn-sm btn-danger remove-link" data-index="${i}">✕</button>
         </div>`).join("")}
       </div>
       <button type="button" class="btn btn-sm btn-outline" id="addCustomLink">+ Link hinzufügen</button>
