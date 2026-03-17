@@ -58,7 +58,10 @@ function nav(s: SiteSettings, active: string): string {
       ${s.customLinks.map(l => `<a href="${escHtml(l.url)}" target="_blank" rel="noopener">${escHtml(l.title)}</a>`).join("")}
     </div>
   </div>
-</nav>`;
+</nav>
+<div class="mobile-side-nav">
+  ${links.map(l => `<a href="${l.href}" class="mobile-side-link ${active === l.id ? "active" : ""}">${l.label}</a>`).join("")}
+</div>`;
 }
 
 function footer(s: SiteSettings): string {

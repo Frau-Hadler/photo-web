@@ -548,23 +548,55 @@ img { max-width: 100%; height: auto; display: block; }
     border-bottom: none;
     box-shadow: none;
   }
-  .nav-toggle { display: block; }
+  /* Im Header auf Handy nur Logo + Überschrift, keine Burger-Navigation */
+  .nav-toggle { display: none; }
   .nav-links {
-    /* Mobil: Menü standardmäßig komplett ausgeblendet,
-       wird nur bei Klick auf die drei Striche angezeigt */
-    display: none;
-    position: fixed; top: 72px; left: 0; right: 0;
-    background: rgba(10,10,10,.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    padding: 2rem;
-    gap: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-links.open {
-    display: flex;
+    /* Navigationslinks im Header auf Handy vollständig verstecken */
+    display: none !important;
   }
   .nav-links a { font-size: 1rem; padding: .75rem 0; }
+
+  /* Seitliche, kompakte Buttons nur für Handy-Navigation */
+  .mobile-side-nav {
+    position: fixed;
+    right: 1rem;
+    top: 45%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    z-index: 900;
+  }
+  .mobile-side-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(20,20,20,.85);
+    border: 1px solid rgba(200,169,126,.4);
+    color: var(--text-secondary);
+    font-size: .7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    box-shadow: 0 4px 18px rgba(0,0,0,.6);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+  }
+  .mobile-side-link:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 26px rgba(0,0,0,.8);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #0a0a0a;
+    border-color: var(--primary);
+  }
+  .mobile-side-link.active {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #0a0a0a;
+    border-color: var(--primary);
+  }
+
   .hero-title { font-size: 2.2rem; }
   .section { padding: 4rem 0; }
   .page-header { padding: 7rem 1.5rem 2rem; }
