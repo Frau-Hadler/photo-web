@@ -1,0 +1,236 @@
+# Natis Fine Creation — Projektdokumentation & Sicherheitsregeln
+
+## Projektübersicht
+
+Private, nicht-kommerzielle Kunst-Galerie Website für [@natisfinecreation](https://www.instagram.com/natisfinecreation/).
+Die dargestellten Kunstwerke dienen ausschließlich zur Inspiration und stehen nicht zum Verkauf.
+
+- **Runtime:** Bun
+- **Framework:** Hono
+- **Daten:** JSON-Dateien (kein externer Datenbankserver)
+- **Hosting:** Netlify (geplant), HTTPS
+- **Backup:** GitHub Repository (nur öffentliche Daten)
+
+---
+
+## KRITISCH: Sensible Daten — NIEMALS auf GitHub
+
+### Diese Dateien dürfen NIEMALS auf GitHub landen:
+
+| Datei | Inhalt | Schutz |
+|---|---|---|
+| `.env` | GitHub-Token, Passwörter, JWT-Secret, E-Mail | `.gitignore` + nie committen |
+| `data/credentials.json` | Login-E-Mail, Passwort-Hash | `.gitignore` + `skipSync = true` |
+| `data/messages.json` | Private Nachrichten: Namen, E-Mail-Adressen, Nachrichteninhalte | `.gitignore` + `skipSync = true` |
+
+### Was SIND sensible Daten (Beispiele):
+
+- **Namen** von Personen, die das Kontaktformular nutzen
+- **E-Mail-Adressen** von Kontaktanfragen
+- **Nachrichteninhalte** (persönliche Anfragen, Ideen, etc.)
+- **Login-Zugangsdaten** (E-Mail, Passwort-Hashes)
+- **GitHub Personal Access Token** (ghp_...)
+- **JWT-Secret** für Session-Verwaltung
+
+### Dreifacher Schutz:
+
+1. **`.gitignore`** — Git ignoriert die Dateien komplett
+2. **`skipSync = true`** — `saveMessages()` und `saveCredentials()` lösen keinen GitHub-Push aus
+3. **Pfad-Blockierung** — Server blockiert HTTP-Zugriff auf `/data/`, `/.env`, `/credentials` mit 403
+
+### Bei Code-Änderungen IMMER prüfen:
+
+- `saveMessages()` muss `skipSync = true` verwenden
+- `saveCredentials()` muss `skipSync = true` verwenden
+- Neue Dateien mit persönlichen Daten müssen in `.gitignore` eingetragen werden
+- `git ls-files data/messages.json` muss leer sein
+- `git ls-files data/credentials.json` muss leer sein
+
+---
+
+## Was auf GitHub gespeichert wird (nur öffentliche Daten)
+
+| Datei | Inhalt | Warum OK |
+|---|---|---|
+| `data/settings.json` | Website-Texte, Farben, Links | Öffentlich auf der Website sichtbar |
+| `data/categories.json` | Galerie-Kategorien | Öffentlich |
+| `data/gallery.json` | Bild-Metadaten (Titel, Dateinamen) | Öffentlich |
+| `uploads/` | Hochgeladene Bilder | Öffentlich auf der Website |
+| Code-Dateien (`src/`, `public/`) | Quellcode | Kein sensibles Material |
+
+---
+
+## Nachrichten-System
+
+- Nachrichten werden über das Kontaktformular gesendet (`POST /api/contact`)
+- Spam-Schutz: Honeypot-Feld + Mathe-Captcha + Rate-Limiting (3/Stunde pro IP)
+- Pflicht: Datenschutz-Checkbox
+- Speicherung: **nur lokal** in `data/messages.json`
+- **Kein GitHub-Sync** — Nachrichten verlassen nie den Server
+- Admin kann: Nachrichten lesen, als gelesen markieren, löschen, per E-Mail antworten
+- Löschen ist **sofort und endgültig** — gelöschte Nachrichten sind unwiederbringlich weg
+
+---
+
+## Admin-Bereich
+
+### Login
+- URL: `/login`
+- Ein einziger Owner-Login (kein Multi-User)
+- JWT-Token in HttpOnly-Cookie (secure auf HTTPS/Netlify)
+- Rate-Limiting: 5 Versuche pro 15 Minuten
+
+### Bearbeitbare Bereiche (alles unter /admin):
+
+| Bereich | Was kann geändert werden |
+|---|---|
+| **Inhalte → Hero** | Titel, Untertitel, Button-Text, Button-Link |
+| **Inhalte → Über mich** | Titel, Text, Profilbild (auto-resize) |
+| **Inhalte → Galerie-Texte** | Galerie-Titel, Untertitel |
+| **Inhalte → Kontakt-Texte** | Kontakt-Titel, Untertitel |
+| **Inhalte → Aufträge** | Auftrags-Titel, Text |
+| **Inhalte → Links** | Social Media Links, eigene Navigation-Links |
+| **Inhalte → Branding** | Website-Name, Tagline, Logo (auto-resize), Farben, Footer, SEO |
+| **Galerie → Upload** | Bilder hochladen mit Titel, Beschreibung, Kategorie |
+| **Galerie → Verwalten** | Bilder bearbeiten, löschen, nach Kategorie filtern |
+| **Galerie → Kategorien** | Kategorien erstellen, löschen |
+| **Nachrichten** | Kontaktanfragen lesen, antworten (mailto), löschen |
+| **Einstellungen → Konto** | E-Mail und Passwort ändern |
+| **Einstellungen → Kontaktformular** | Empfänger-E-Mail-Adresse ändern |
+| **Einstellungen → Impressum** | Name, Adresse, PLZ, Stadt, Land, E-Mail, Telefon |
+| **Einstellungen → Datenschutz** | Zusätzlicher Text am Ende der Datenschutzerklärung |
+
+### Änderungen werden SOFORT übernommen
+Jede Änderung im Admin-Bereich wird direkt in die JSON-Datei geschrieben. Beim nächsten Seitenaufruf eines Besuchers wird die aktuelle Version angezeigt. Kein Cache, kein Delay.
+
+---
+
+## Bild-Upload & Auto-Resize
+
+Bilder werden vor dem Upload im Browser automatisch verkleinert:
+
+| Typ | Max. Größe | Qualität |
+|---|---|---|
+| Logo | 400 × 400 px | 85% JPEG |
+| Profilbild | 800 × 1200 px | 85% JPEG |
+| Galerie | 1920 × 1920 px | 85% JPEG |
+
+CSS `object-fit: cover` sorgt dafür, dass jedes Bild im richtigen Seitenverhältnis angezeigt wird.
+
+---
+
+## Sicherheit
+
+### HTTP Security Headers
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: SAMEORIGIN`
+- `X-XSS-Protection: 1; mode=block`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+- `Content-Security-Policy: default-src 'self'; script-src 'self'; ...`
+
+### Blockierte Pfade (403 Forbidden)
+`/.git`, `/.env`, `/data/`, `/.gitignore`, `/tsconfig`, `/src/`, `/node_modules/`, `/package.json`, `/bun.lock`, `/credentials`, `/askpass`
+
+### Auth für API
+- Admin-Seiten: Redirect zu `/login` bei fehlender Auth
+- Admin-API (`/api/admin/*`): JSON 401 bei fehlender Auth (kein Redirect)
+- Cookie: `HttpOnly`, `secure` auf Produktion/Netlify, `SameSite: Lax`
+
+### GitHub-Token
+- Nur in `.env` gespeichert (nie committed)
+- Git-Operationen nutzen `askpass.js` Skript mit Umgebungsvariable
+- Alle Git-Ausgaben werden sanitized (`***TOKEN***`)
+- Token ist nie im Frontend sichtbar
+
+---
+
+## Rechtliches
+
+### Impressum
+- Basiert auf **§ 5 DDG** (Digitale-Dienste-Gesetz, seit 2024)
+- Hinweis: **Private, nicht-kommerzielle Website**
+- Kunstwerke: **Nur zur Inspiration, kein Verkauf**
+- Kontaktformular: **Nur persönlicher Austausch, kein Gewerbe**
+- Admin editiert nur: Name, Adresse, PLZ, Stadt, Land, E-Mail, Telefon
+- Kein USt-IdNr-Feld (nicht relevant für Privat)
+
+### Datenschutzerklärung
+- DSGVO-konform für private Website
+- Hosting: **Netlify** mit SSL/TLS, EU-US Data Privacy Framework
+- Keine Tracking-Cookies, keine Analyse, kein Profiling
+- Kontaktformular: Einwilligung über Checkbox (Art. 6 Abs. 1 lit. a DSGVO)
+- Abschnitt 5: "Keine kommerzielle Nutzung"
+- IT-Recht Kanzlei Banner am Ende (Stand: 17.03.2026, 20:13:05)
+
+---
+
+## GitHub-Sync
+
+- **Asynchron** — blockiert keine Seitenauslieferung
+- **Debounced** (2 Sekunden) — mehrere Änderungen werden gebündelt
+- Nur öffentliche Daten werden gepusht
+- Bei Push-Fehler: automatischer Pull + Retry
+- Repository: `Frau-Hadler/photo-web` (Branch: `main`)
+
+---
+
+## Dateistruktur
+
+```
+natisfinecreation/
+├── .env                    ← SENSIBEL (nie auf GitHub)
+├── .gitignore              ← Schützt sensible Dateien
+├── claude.md               ← Diese Dokumentation
+├── package.json
+├── tsconfig.json
+├── data/
+│   ├── settings.json       ← Öffentliche Website-Einstellungen
+│   ├── categories.json     ← Öffentliche Kategorien
+│   ├── gallery.json        ← Öffentliche Bild-Metadaten
+│   ├── credentials.json    ← SENSIBEL (nie auf GitHub)
+│   └── messages.json       ← SENSIBEL (nie auf GitHub)
+├── uploads/                ← Hochgeladene Bilder (öffentlich)
+├── src/
+│   ├── index.ts            ← Hauptserver, Routing, Security-Middleware
+│   ├── api.ts              ← Alle API-Endpunkte
+│   ├── auth.ts             ← JWT-Auth, Cookies, Middleware
+│   ├── storage.ts          ← JSON-Datenspeicherung
+│   ├── pages.ts            ← Öffentliche HTML-Seiten
+│   ├── admin-pages.ts      ← Admin-Panel HTML
+│   └── github-sync.ts      ← Git-Synchronisation
+└── public/
+    ├── css/style.css        ← Öffentliches Design
+    ├── css/admin.css        ← Admin-Design
+    ├── js/main.js           ← Öffentliches JavaScript
+    └── js/admin.js          ← Admin-JavaScript
+```
+
+---
+
+## Befehle
+
+```bash
+# Entwicklung (mit Auto-Reload)
+bun --watch run src/index.ts
+
+# Produktion
+bun run src/index.ts
+
+# Abhängigkeiten installieren
+bun install
+```
+
+---
+
+## CHECKLISTE vor jedem Deploy
+
+- [ ] `.env` ist NICHT in Git: `git ls-files .env` (muss leer sein)
+- [ ] `data/credentials.json` ist NICHT in Git
+- [ ] `data/messages.json` ist NICHT in Git
+- [ ] Kein Token in Git-History: `git log --all -p | findstr "ghp_"` (muss leer sein)
+- [ ] Alle Admin-Formulare getestet
+- [ ] Kontaktformular funktioniert
+- [ ] Nachrichten werden empfangen und können gelöscht werden
+- [ ] Impressum-Daten korrekt eingetragen
+- [ ] Sensible Pfade blockiert (/.env, /data/, /src/)
