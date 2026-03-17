@@ -31,7 +31,8 @@ ${s.aboutImage ? `<meta property="og:image" content="${escHtml(s.aboutImage)}">`
 ${s.aboutImage ? `<meta name="twitter:image" content="${escHtml(s.aboutImage)}">` : s.logo ? `<meta name="twitter:image" content="${escHtml(s.logo)}">` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css">
+<!-- Cache-Busting für CSS, damit Änderungen (v.a. mobiler Header) zuverlässig ankommen -->
+<link rel="stylesheet" href="/css/style.css?v=20260317">
 <style>:root{--primary:${s.primaryColor};--accent:${s.accentColor}}</style>
 ${extra}
 </head>`;
