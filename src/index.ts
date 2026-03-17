@@ -12,6 +12,40 @@ await initCredentials();
 
 const app = new Hono();
 
+app.use("*", async (c, next) => {
+  const path = c.req.path.toLowerCase();
+
+  const blocked = [
+    "/.git", "/.env", "/data/", "/.gitignore",
+    "/tsconfig", "/src/", "/node_modules/",
+    "/package.json", "/bun.lock", "/.git/",
+    "/credentials", "/askpass"
+  ];
+
+  for (const b of blocked) {
+    if (path.startsWith(b) || path.includes("/.git/") || path.includes("/..")) {
+      return c.text("403 Forbidden", 403);
+    }
+  }
+
+  await next();
+
+  c.header("X-Content-Type-Options", "nosniff");
+  c.header("X-Frame-Options", "SAMEORIGIN");
+  c.header("X-XSS-Protection", "1; mode=block");
+  c.header("Referrer-Policy", "strict-origin-when-cross-origin");
+  c.header("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  c.header("Content-Security-Policy",
+    "default-src 'self'; " +
+    "script-src 'self'; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
+    "img-src 'self' data: blob:; " +
+    "connect-src 'self'; " +
+    "frame-ancestors 'self'"
+  );
+});
+
 app.use("/uploads/*", serveStatic({ root: "./" }));
 app.use("/css/*", serveStatic({ root: "./public" }));
 app.use("/js/*", serveStatic({ root: "./public" }));

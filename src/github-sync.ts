@@ -1,4 +1,5 @@
 import { join } from "path";
+import { writeFileSync, unlinkSync, existsSync, mkdirSync } from "fs";
 
 const ROOT = join(import.meta.dir, "..");
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
@@ -8,6 +9,21 @@ const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
 let syncPending = false;
 let syncTimeout: ReturnType<typeof setTimeout> | null = null;
 let isInitialized = false;
+let askpassPath = "";
+
+function sanitizeOutput(text: string): string {
+  if (!GITHUB_TOKEN) return text;
+  return text.replace(new RegExp(GITHUB_TOKEN, "g"), "***TOKEN***");
+}
+
+function setupAskpass(): string {
+  const dir = join(ROOT, ".git");
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+
+  const scriptPath = join(dir, "askpass.js");
+  writeFileSync(scriptPath, `#!/usr/bin/env node\nconsole.log(process.env.GIT_AUTH_TOKEN || "");\n`, "utf-8");
+  return scriptPath;
+}
 
 async function git(...args: string[]): Promise<{ ok: boolean; stdout: string; stderr: string }> {
   try {
@@ -18,7 +34,9 @@ async function git(...args: string[]): Promise<{ ok: boolean; stdout: string; st
       env: {
         ...process.env,
         GIT_TERMINAL_PROMPT: "0",
-        GIT_ASKPASS: "",
+        GIT_ASKPASS: askpassPath || "",
+        GIT_AUTH_TOKEN: GITHUB_TOKEN,
+        GITHUB_TOKEN: undefined as any,
       }
     });
 
@@ -26,15 +44,19 @@ async function git(...args: string[]): Promise<{ ok: boolean; stdout: string; st
     const stderr = await new Response(proc.stderr).text();
     const exitCode = await proc.exited;
 
-    return { ok: exitCode === 0, stdout: stdout.trim(), stderr: stderr.trim() };
+    return {
+      ok: exitCode === 0,
+      stdout: sanitizeOutput(stdout.trim()),
+      stderr: sanitizeOutput(stderr.trim())
+    };
   } catch (e: any) {
-    return { ok: false, stdout: "", stderr: e.message || "Git command failed" };
+    return { ok: false, stdout: "", stderr: sanitizeOutput(e.message || "Git command failed") };
   }
 }
 
 function getRemoteUrl(): string {
   if (!GITHUB_TOKEN || !GITHUB_REPO) return "";
-  return `https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`;
+  return `https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git`;
 }
 
 export async function initGitRepo(): Promise<void> {
@@ -43,7 +65,7 @@ export async function initGitRepo(): Promise<void> {
     return;
   }
 
-  const remoteUrl = getRemoteUrl();
+  askpassPath = setupAskpass();
 
   const { ok: isRepo } = await git("rev-parse", "--is-inside-work-tree");
 
@@ -58,6 +80,10 @@ export async function initGitRepo(): Promise<void> {
     await git("config", "user.email", "noreply@natisfinecreation.de");
   }
 
+  await git("config", "credential.helper", "");
+  await git("config", "log.showSignature", "false");
+
+  const remoteUrl = getRemoteUrl();
   const { stdout: remotes } = await git("remote");
   if (remotes.includes("origin")) {
     await git("remote", "set-url", "origin", remoteUrl);
@@ -78,7 +104,7 @@ export async function initGitRepo(): Promise<void> {
     const { ok: hasLocal } = await git("rev-parse", "HEAD");
     if (hasLocal) {
       await git("merge", "origin/" + GITHUB_BRANCH, "--allow-unrelated-histories", "--no-edit", "-X", "ours");
-      console.log("✓ Mit GitHub synchronisiert (Pull)");
+      console.log("✓ Mit GitHub synchronisiert");
     } else {
       await git("checkout", "-b", GITHUB_BRANCH, "origin/" + GITHUB_BRANCH);
       console.log("✓ Branch von GitHub geklont");
@@ -127,7 +153,7 @@ export async function syncToGitHub(message?: string): Promise<void> {
         }
       }
     } catch (e: any) {
-      console.error("✗ Sync-Fehler:", e.message);
+      console.error("✗ Sync-Fehler:", sanitizeOutput(e.message));
     } finally {
       syncPending = false;
     }
