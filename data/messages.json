@@ -1,0 +1,12 @@
+[
+  {
+    "id": "5d70df68-5bcc-4b8e-840b-6ced5d9a9197",
+    "name": "Test",
+    "email": "test@test.de",
+    "subject": "Test-Anfrage",
+    "message": "Das ist eine Testnachricht",
+    "createdAt": "2026-03-17T18:35:56.071Z",
+    "read": false,
+    "privacyAccepted": true
+  }
+]
