@@ -532,14 +532,17 @@ img { max-width: 100%; height: auto; display: block; }
 }
 @media (max-width: 768px) {
   .main-nav {
-    /* Auf dem Handy weniger „schwarzer Balken“ im Header */
+    /* Auf dem Handy keine dauerhafte Balken-Leiste am oberen Rand */
+    position: absolute;
     background: transparent;
     border-bottom: none;
+    box-shadow: none;
   }
   .main-nav.scrolled {
-    /* Beim Scrollen weiterhin gut lesbare Navigation */
-    background: rgba(10,10,10,.95);
-    border-bottom: 1px solid rgba(200,169,126,.1);
+    /* Auch im „scrolled“-Zustand kein eigener Balken-Hintergrund */
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
   }
   .nav-toggle { display: block; }
   .nav-links {
