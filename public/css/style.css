@@ -532,8 +532,12 @@ img { max-width: 100%; height: auto; display: block; }
 }
 @media (max-width: 768px) {
   .main-nav {
-    /* Auf dem Handy keine dauerhafte Balken-Leiste am oberen Rand */
-    position: absolute;
+    /* Auf dem Handy sitzt die Navigation normal im Layout,
+       ohne festen, überlagerten Balken am oberen Rand */
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
     background: transparent;
     border-bottom: none;
     box-shadow: none;
