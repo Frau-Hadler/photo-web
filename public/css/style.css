@@ -546,13 +546,20 @@ img { max-width: 100%; height: auto; display: block; }
   }
   .nav-toggle { display: block; }
   .nav-links {
+    /* Mobil: Menü standardmäßig komplett ausgeblendet,
+       wird nur bei Klick auf die drei Striche angezeigt */
+    display: none;
     position: fixed; top: 72px; left: 0; right: 0;
-    background: rgba(10,10,10,.98); backdrop-filter: blur(20px);
-    flex-direction: column; padding: 2rem; gap: 1rem;
-    transform: translateY(-110%); transition: transform var(--transition);
+    background: rgba(10,10,10,.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
     border-bottom: 1px solid var(--border);
   }
-  .nav-links.open { transform: translateY(0); }
+  .nav-links.open {
+    display: flex;
+  }
   .nav-links a { font-size: 1rem; padding: .75rem 0; }
   .hero-title { font-size: 2.2rem; }
   .section { padding: 4rem 0; }
