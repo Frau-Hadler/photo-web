@@ -26,18 +26,18 @@
   ],
   "customLinks": [],
   "impressum": {
-    "name": "Vorname Nachname",
-    "address": "Musterstraße 1",
-    "zip": "12345",
-    "city": "Musterstadt",
+    "name": "Test Person",
+    "address": "Teststr. 1",
+    "zip": "10115",
+    "city": "Berlin",
     "country": "Deutschland",
-    "email": "kontakt@natisfinecreation.de",
-    "phone": "",
+    "email": "tp@test.de",
+    "phone": "030-123",
     "taxId": "",
     "extra": ""
   },
   "datenschutzExtra": "",
-  "metaDescription": "Natis Fine Creation — Einzigartige Kunstwerke und kreative Designs. Portfolio und Auftragsarbeiten.",
+  "metaDescription": "Test SEO",
   "primaryColor": "#c8a97e",
   "accentColor": "#a07850"
 }
