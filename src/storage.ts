@@ -172,7 +172,7 @@ export function getMessages(): ContactMessage[] {
 }
 
 export function saveMessages(msgs: ContactMessage[]): void {
-  save("messages", msgs);
+  save("messages", msgs, true);
 }
 
 export function getCredentials(): Credentials {

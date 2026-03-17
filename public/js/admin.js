@@ -631,7 +631,6 @@ function initSettingsForms() {
       country: fd.get("imp_country"),
       email: fd.get("imp_email"),
       phone: fd.get("imp_phone"),
-      taxId: fd.get("imp_taxId"),
       extra: fd.get("imp_extra")
     };
     return await api("/admin/settings", { method: "PUT", body: JSON.stringify({ impressum }) });

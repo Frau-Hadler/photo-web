@@ -285,7 +285,8 @@ ${nav(s, "")}
 
 <section class="section legal-section">
   <div class="container legal-content fade-up">
-    <h2>Angaben gemäß § 5 TMG</h2>
+
+    <h2>Angaben gemäß § 5 DDG</h2>
     <p>${escHtml(imp.name)}<br>
     ${escHtml(imp.address)}<br>
     ${escHtml(imp.zip)} ${escHtml(imp.city)}<br>
@@ -295,19 +296,22 @@ ${nav(s, "")}
     <p>E-Mail: ${escHtml(imp.email)}</p>
     ${imp.phone ? `<p>Telefon: ${escHtml(imp.phone)}</p>` : ""}
 
-    ${imp.taxId ? `<h2>Umsatzsteuer-ID</h2><p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: ${escHtml(imp.taxId)}</p>` : ""}
+    <h2>Hinweis zur Natur dieser Website</h2>
+    <p>Bei dieser Website handelt es sich um eine <strong>private, nicht-kommerzielle Online-Galerie</strong>. Die hier dargestellten Kunstwerke, Bilder und kreativen Arbeiten dienen <strong>ausschließlich zur Inspiration und persönlichen Präsentation</strong> und stehen <strong>nicht zum Verkauf</strong>. Es werden keine Waren oder Dienstleistungen gewerblich angeboten.</p>
+    <p>Das Kontaktformular dient ausschließlich dem persönlichen Austausch, z.&nbsp;B. für Ideen, Anregungen oder kreative Anfragen. Es findet <strong>kein gewerblicher Handel</strong> über diese Website statt.</p>
+
+    <h2>Urheberrecht</h2>
+    <p>Sämtliche auf dieser Website veröffentlichten Inhalte — insbesondere Bilder, Grafiken, Fotos, Texte und kreative Arbeiten — unterliegen dem deutschen Urheberrecht und sind Eigentum der Seitenbetreiberin, sofern nicht anders gekennzeichnet.</p>
+    <p>Die Inhalte dieser Seite dienen <strong>ausschließlich zur Ansicht und Inspiration</strong>. Jede Vervielfältigung, Bearbeitung, Verbreitung, Speicherung oder sonstige Verwertung — auch in Teilen — bedarf der vorherigen schriftlichen Zustimmung der Urheberin. Eine kommerzielle Nutzung der Inhalte ist ohne ausdrückliche Genehmigung nicht gestattet.</p>
+    <p>Sollten Sie auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
 
     <h2>Haftung für Inhalte</h2>
-    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+    <p>Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Betreiberin dieser privaten Website sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
     <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
 
     <h2>Haftung für Links</h2>
-    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
-    <p>Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-
-    <h2>Urheberrecht</h2>
-    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
-    <p>Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+    <p>Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
 
     ${imp.extra ? `<h2>Zusätzliche Angaben</h2><p>${escHtml(imp.extra)}</p>` : ""}
   </div>
@@ -332,18 +336,22 @@ ${nav(s, "")}
   <div class="container legal-content fade-up">
 
     <h2>1. Datenschutz auf einen Blick</h2>
+
+    <h3>Hinweis zur Natur dieser Website</h3>
+    <p>Bei dieser Website handelt es sich um eine <strong>private, nicht-kommerzielle Online-Galerie</strong>. Es werden keine Waren oder Dienstleistungen gewerblich angeboten oder verkauft. Die dargestellten Kunstwerke dienen ausschließlich zur Inspiration und persönlichen Präsentation. Das Kontaktformular dient dem persönlichen Austausch, z.&nbsp;B. für Ideen und kreative Anregungen.</p>
+
     <h3>Allgemeine Hinweise</h3>
     <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer nachfolgend aufgeführten Datenschutzerklärung.</p>
 
     <h3>Datenerfassung auf dieser Website</h3>
     <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong></p>
-    <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber: ${escHtml(imp.name)}, ${escHtml(imp.address)}, ${escHtml(imp.zip)} ${escHtml(imp.city)}. E-Mail: ${escHtml(imp.email)}</p>
+    <p>Die Datenverarbeitung auf dieser privaten Website erfolgt durch: ${escHtml(imp.name)}, ${escHtml(imp.address)}, ${escHtml(imp.zip)} ${escHtml(imp.city)}. E-Mail: ${escHtml(imp.email)}</p>
 
     <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
-    <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).</p>
+    <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen — beispielsweise, wenn Sie das Kontaktformular nutzen, um uns eine Idee oder Anregung mitzuteilen. Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).</p>
 
     <p><strong>Wofür nutzen wir Ihre Daten?</strong></p>
-    <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden. Wenn Sie uns über das Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet.</p>
+    <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Über das Kontaktformular eingegebene Daten werden ausschließlich zur Beantwortung Ihrer persönlichen Anfrage verwendet. Es findet <strong>keine kommerzielle Nutzung, kein Tracking und keine Weitergabe an Dritte</strong> statt.</p>
 
     <p><strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong></p>
     <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
@@ -355,17 +363,17 @@ ${nav(s, "")}
     <p>Netlify verfügt über Zertifizierungen nach dem EU-US Data Privacy Framework. Weitere Informationen finden Sie in der <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerklärung von Netlify</a>.</p>
 
     <h3>SSL- bzw. TLS-Verschlüsselung</h3>
-    <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Kontaktanfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile. Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
+    <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Kontaktanfragen, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile. Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
 
     <h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
     <h3>Datenschutz</h3>
-    <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
-    <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+    <p>Die Betreiberin dieser privaten Website nimmt den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+    <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.&nbsp;B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
 
     <h3>Hinweis zur verantwortlichen Stelle</h3>
     <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
     <p>${escHtml(imp.name)}<br>${escHtml(imp.address)}<br>${escHtml(imp.zip)} ${escHtml(imp.city)}<br>E-Mail: ${escHtml(imp.email)}</p>
-    <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, E-Mail-Adressen o. Ä.) entscheidet.</p>
+    <p>Verantwortliche Stelle ist die natürliche Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.&nbsp;B. Namen, E-Mail-Adressen o.&nbsp;Ä.) entscheidet.</p>
 
     <h3>Speicherdauer</h3>
     <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben.</p>
@@ -382,20 +390,39 @@ ${nav(s, "")}
     <h3>Recht auf Einschränkung der Verarbeitung</h3>
     <p>Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu können Sie sich jederzeit an uns wenden.</p>
 
+    <h3>Beschwerderecht bei der zuständigen Aufsichtsbehörde</h3>
+    <p>Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde zu. Das Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.</p>
+
     <h2>4. Datenerfassung auf dieser Website</h2>
     <h3>Kontaktformular</h3>
-    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-    <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), sofern diese abgefragt wurde.</p>
-    <p>Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt. Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.</p>
+    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten (Name, E-Mail-Adresse, Betreff, Nachricht) zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+    <p>Das Kontaktformular auf dieser Website dient <strong>ausschließlich dem persönlichen Austausch</strong> — beispielsweise für kreative Ideen, Anregungen oder allgemeine Anfragen. Es findet <strong>kein gewerblicher Zweck</strong> statt.</p>
+    <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie durch Aktivierung der Datenschutz-Checkbox im Kontaktformular erteilen. Sie können diese Einwilligung jederzeit widerrufen.</p>
+    <p>Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt.</p>
 
     <h3>Server-Log-Dateien</h3>
-    <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind: Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage, IP-Adresse.</p>
+    <p>Der Hosting-Provider (Netlify) erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Dies sind: Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer-URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage, IP-Adresse.</p>
     <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
 
     <h3>Cookies</h3>
-    <p>Diese Website verwendet nur technisch notwendige Cookies für die Funktionalität des Administrationsbereichs. Es werden keine Tracking-Cookies oder Cookies für Werbezwecke eingesetzt. Das für die Administrator-Anmeldung verwendete Cookie dient ausschließlich der Authentifizierung und enthält keine personenbezogenen Daten.</p>
+    <p>Diese Website verwendet <strong>nur technisch notwendige Cookies</strong> für die Funktionalität des Administrationsbereichs. Es werden <strong>keine Tracking-Cookies, Analyse-Cookies oder Cookies für Werbezwecke</strong> eingesetzt. Das für die Administrator-Anmeldung verwendete Session-Cookie dient ausschließlich der Authentifizierung und enthält keine personenbezogenen Daten von Besuchern.</p>
+    <p>Besucher der öffentlichen Website erhalten keine Cookies.</p>
 
-    ${s.datenschutzExtra ? `<h2>5. Zusätzliche Informationen</h2><p>${escHtml(s.datenschutzExtra)}</p>` : ""}
+    <h2>5. Keine kommerzielle Nutzung</h2>
+    <p>Diese Website dient <strong>ausschließlich privaten Zwecken</strong>. Es werden keine Waren oder Dienstleistungen angeboten, verkauft oder beworben. Die dargestellten Kunstwerke und kreativen Arbeiten dienen ausschließlich der Inspiration und persönlichen Präsentation. Es findet keinerlei gewerbliche Tätigkeit über diese Website statt.</p>
+    <p>Es werden <strong>keine Nutzerdaten für kommerzielle Zwecke, Werbung oder Profiling</strong> verwendet oder an Dritte weitergegeben.</p>
+
+    ${s.datenschutzExtra ? `<h2>6. Zusätzliche Informationen</h2><p>${escHtml(s.datenschutzExtra)}</p>` : ""}
+
+    <div id="itkanzlei_txt_copyright" style="font-size: 12px; margin-top: 4em; padding-top: 2em; border-top: 1px solid var(--border);">
+      <div style="display: inline-block; vertical-align: top;">
+        <a href="https://www.it-recht-kanzlei.de/" target="_blank" rel="noopener">
+          <img src="https://www.it-recht-kanzlei.de/logo/Copyright-Logo_Datenschutzerklaerung.png?i=5c20a-4298c-39c8-907e-1" id="itkanzlei_img_copyright" alt="&copy; IT-Recht Kanzlei" title="&copy; IT-Recht Kanzlei" style="margin-top: -20px; border-style: none; max-width: 100%;" />
+        </a>
+      </div>
+      <div style="display: inline-block; vertical-align: top; margin-left: 5px; float: right; white-space: nowrap;">Stand: 17.03.2026, 20:13:05</div>
+      <div style="clear: right;"></div>
+    </div>
   </div>
 </section>
 

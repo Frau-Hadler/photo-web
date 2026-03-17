@@ -306,19 +306,19 @@ export function einstellungenPage(): string {
 <div class="tab-content" id="tab-impressum">
   <div class="form-card">
     <h3>Impressum-Daten</h3>
+    <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1.5rem">Hier kannst du deine persönlichen Kontaktdaten für das Impressum hinterlegen. Die rechtlichen Texte (Haftung, Urheberrecht etc.) werden automatisch generiert. Dies ist eine private, nicht-kommerzielle Website.</p>
     <form id="impressumForm" class="admin-form">
-      <div class="form-group"><label>Name / Firma</label><input type="text" name="imp_name" value="${escHtml(imp.name)}"></div>
-      <div class="form-group"><label>Straße & Hausnummer</label><input type="text" name="imp_address" value="${escHtml(imp.address)}"></div>
+      <div class="form-group"><label>Vollständiger Name</label><input type="text" name="imp_name" value="${escHtml(imp.name)}" placeholder="Vorname Nachname"></div>
+      <div class="form-group"><label>Straße & Hausnummer</label><input type="text" name="imp_address" value="${escHtml(imp.address)}" placeholder="Musterstraße 1"></div>
       <div class="form-row">
-        <div class="form-group"><label>PLZ</label><input type="text" name="imp_zip" value="${escHtml(imp.zip)}"></div>
-        <div class="form-group"><label>Stadt</label><input type="text" name="imp_city" value="${escHtml(imp.city)}"></div>
+        <div class="form-group"><label>PLZ</label><input type="text" name="imp_zip" value="${escHtml(imp.zip)}" placeholder="12345"></div>
+        <div class="form-group"><label>Stadt</label><input type="text" name="imp_city" value="${escHtml(imp.city)}" placeholder="Musterstadt"></div>
       </div>
-      <div class="form-group"><label>Land</label><input type="text" name="imp_country" value="${escHtml(imp.country)}"></div>
-      <div class="form-group"><label>E-Mail</label><input type="email" name="imp_email" value="${escHtml(imp.email)}"></div>
-      <div class="form-group"><label>Telefon</label><input type="text" name="imp_phone" value="${escHtml(imp.phone)}"></div>
-      <div class="form-group"><label>USt-IdNr.</label><input type="text" name="imp_taxId" value="${escHtml(imp.taxId)}"></div>
-      <div class="form-group"><label>Zusätzliche Angaben</label><textarea name="imp_extra" rows="3">${escHtml(imp.extra)}</textarea></div>
-      <button type="submit" class="btn btn-primary">Speichern</button>
+      <div class="form-group"><label>Land</label><input type="text" name="imp_country" value="${escHtml(imp.country)}" placeholder="Deutschland"></div>
+      <div class="form-group"><label>E-Mail</label><input type="email" name="imp_email" value="${escHtml(imp.email)}" placeholder="deine@email.de"></div>
+      <div class="form-group"><label>Telefon (optional)</label><input type="text" name="imp_phone" value="${escHtml(imp.phone)}" placeholder="+49 123 456789"><small>Optional — wird nur angezeigt, wenn ausgefüllt.</small></div>
+      <div class="form-group"><label>Zusätzliche Angaben (optional)</label><textarea name="imp_extra" rows="3" placeholder="Z.B. weitere Kontaktmöglichkeiten">${escHtml(imp.extra)}</textarea></div>
+      <button type="submit" class="btn btn-primary">Impressum speichern</button>
       <div id="impressumStatus" class="form-status"></div>
     </form>
   </div>
