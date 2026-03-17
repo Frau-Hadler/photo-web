@@ -32,7 +32,7 @@ ${s.aboutImage ? `<meta name="twitter:image" content="${escHtml(s.aboutImage)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- Cache-Busting für CSS, damit Änderungen (v.a. mobiler Header) zuverlässig ankommen -->
-<link rel="stylesheet" href="/css/style.css?v=20260317">
+<link rel="stylesheet" href="/css/style.css?v=20260318">
 <style>:root{--primary:${s.primaryColor};--accent:${s.accentColor}}</style>
 ${extra}
 </head>`;
@@ -391,7 +391,7 @@ ${nav(s, "")}
 </section>
 
 <section class="section legal-section">
-  <div class="container legal-content fade-up">
+  <div class="container legal-content">
 
     <h2>1. Datenschutz auf einen Blick</h2>
 
@@ -470,16 +470,13 @@ ${nav(s, "")}
     <p>Diese Website dient <strong>ausschließlich privaten Zwecken</strong>. Es werden keine Waren oder Dienstleistungen angeboten, verkauft oder beworben. Die dargestellten Kunstwerke und kreativen Arbeiten dienen ausschließlich der Inspiration und persönlichen Präsentation. Es findet keinerlei gewerbliche Tätigkeit über diese Website statt.</p>
     <p>Es werden <strong>keine Nutzerdaten für kommerzielle Zwecke, Werbung oder Profiling</strong> verwendet oder an Dritte weitergegeben.</p>
 
-    ${s.datenschutzExtra ? `<h2>6. Zusätzliche Informationen</h2><p>${escHtml(s.datenschutzExtra)}</p>` : ""}
+    ${s.datenschutzExtra ? `<h2>6. Zusätzliche Informationen</h2><div class="legal-extra">${escHtml(s.datenschutzExtra).replace(/\n/g, "<br>")}</div>` : ""}
 
-    <div id="itkanzlei_txt_copyright" style="font-size: 12px; margin-top: 4em; padding-top: 2em; border-top: 1px solid var(--border);">
-      <div style="display: inline-block; vertical-align: top;">
-        <a href="https://www.it-recht-kanzlei.de/" target="_blank" rel="noopener">
-          <img src="https://www.it-recht-kanzlei.de/logo/Copyright-Logo_Datenschutzerklaerung.png?i=5c20a-4298c-39c8-907e-1" id="itkanzlei_img_copyright" alt="&copy; IT-Recht Kanzlei" title="&copy; IT-Recht Kanzlei" style="margin-top: -20px; border-style: none; max-width: 100%;" />
-        </a>
-      </div>
-      <div style="display: inline-block; vertical-align: top; margin-left: 5px; float: right; white-space: nowrap;">Stand: 17.03.2026, 20:13:05</div>
-      <div style="clear: right;"></div>
+    <div class="legal-footer-banner">
+      <a href="https://www.it-recht-kanzlei.de/" target="_blank" rel="noopener" class="legal-footer-banner-link">
+        <img src="https://www.it-recht-kanzlei.de/logo/Copyright-Logo_Datenschutzerklaerung.png?i=5c20a-4298c-39c8-907e-1" alt="© IT-Recht Kanzlei" class="legal-footer-banner-img">
+      </a>
+      <span class="legal-footer-banner-date">Stand: 17.03.2026, 20:13:05</span>
     </div>
   </div>
 </section>

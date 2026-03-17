@@ -452,6 +452,14 @@ img { max-width: 100%; height: auto; display: block; }
 .legal-content h2:first-child { margin-top: 0; }
 .legal-content h3 { font-size: 1.15rem; margin: 1.5rem 0 .75rem; }
 .legal-content p { color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.8; }
+.legal-extra { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
+.legal-footer-banner {
+  margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.legal-footer-banner-link { display: inline-block; }
+.legal-footer-banner-img { max-width: 100%; height: auto; display: block; border: none; }
+.legal-footer-banner-date { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
 
 /* === Footer === */
 .site-footer {
