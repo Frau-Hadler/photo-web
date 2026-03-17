@@ -180,7 +180,7 @@ export function getCredentials(): Credentials {
 }
 
 export function saveCredentials(c: Credentials): void {
-  save("credentials", c);
+  save("credentials", c, true);
 }
 
 export async function initCredentials(): Promise<void> {
