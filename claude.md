@@ -349,6 +349,22 @@ Wichtig:
 
 ---
 
+## Hinweis: Fehleranalyse mobil (Header / Deploy)
+
+- Wenn auf dem Handy scheinbar alte Stände (z.B. Navigations-Layout) angezeigt werden:
+  - **Zuerst** im Railway-Dashboard prüfen, ob der aktuellste Commit auf `main` wirklich deployed ist (Tab „Deployments“).
+  - **Dann** sicherstellen, dass unter `Settings → Source`:
+    - `Source Repo` auf `Frau-Hadler/photo-web` zeigt,
+    - `Root Directory` auf `/` steht (nicht `/data` o.Ä.),
+    - `Branch connected to production` auf `main` gesetzt ist.
+  - Erst wenn diese Punkte stimmen, lohnt sich Browser-Cache-Löschen / privates Fenster.
+- Viele „Design ändert sich nicht“-Probleme kommen von:
+  - falschem Root-Verzeichnis,
+  - nicht aktuellem Deploy
+  und nicht vom eigentlichen CSS/HTML.
+
+---
+
 ## Dateistruktur
 
 ```
