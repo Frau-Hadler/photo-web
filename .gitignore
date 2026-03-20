@@ -6,3 +6,15 @@ dist/
 Thumbs.db
 data/credentials.json
 data/messages.json
+
+# Code bleibt nur lokal auf dem Home-Server
+src/
+public/
+package.json
+bun.lock
+tsconfig.json
+Dockerfile
+.dockerignore
+railway.json
+claude.md
+.git/askpass.js
