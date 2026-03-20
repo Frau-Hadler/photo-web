@@ -19,9 +19,9 @@
   "footerText": "© 2026 Natis Fine Creation. Alle Rechte vorbehalten.",
   "socialLinks": [
     {
+      "icon": "instagram",
       "platform": "Instagram",
-      "url": "https://www.instagram.com/natisfinecreation/",
-      "icon": "instagram"
+      "url": "https://www.instagram.com/natisfinecreation/"
     }
   ],
   "customLinks": [],
