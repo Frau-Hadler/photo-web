@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "01ef8503-bb5c-468b-9f3b-354cec336d42",
+    "name": "Natur",
+    "description": "Hier folgen Natur Bilder",
+    "order": 0,
+    "createdAt": "2026-04-03T23:08:58.582Z"
+  }
+]
