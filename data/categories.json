@@ -5,5 +5,12 @@
     "description": "Hier folgen Natur Bilder",
     "order": 0,
     "createdAt": "2026-04-03T23:08:58.582Z"
+  },
+  {
+    "id": "053ab3d2-a1ce-4599-8247-4b9af7c7e1a0",
+    "name": "Motor",
+    "description": "Alles Rund um Autos wie Sportwägen ect.",
+    "order": 1,
+    "createdAt": "2026-04-03T23:09:50.137Z"
   }
 ]
